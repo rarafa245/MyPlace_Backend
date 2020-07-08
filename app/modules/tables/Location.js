@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize')
-const { db } = require('../../../config')
+const db  = require('./../../../db')
 
 const Location = db.define('location', {
   local_id: {

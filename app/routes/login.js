@@ -1,8 +1,8 @@
+const { registerAccount } = require('./../controllers/login')
+
 const login = (application) => {
 
-  application.get('/', (req, res) => {
-    res.send('<h1>Hello World</h1>')
-  })
+  application.post('/register', (req, res) => registerAccount(req, res))
 
 }
 

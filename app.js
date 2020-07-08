@@ -1,6 +1,5 @@
-const { server } = require('./config')
+const server = require('./config')
 
-
-server.listen(3000, () => {
-    console.log('Server Start | Port 3000')
+server.listen(5000, () => {
+    console.log('Server Start | Port 5000')
 })
