@@ -1,5 +1,11 @@
 const { Users, Location } = require('./../tables')
 
+/*  Insert functions.
+    Acessing tables in DB
+    All functions return promisses.
+    ORM: Sequelize
+*/
+
 const insertUser = (user, password) => {
 
   return Users.create({
@@ -9,11 +15,16 @@ const insertUser = (user, password) => {
   })
 }
 
-const insertLocation = (location) => {
+const insertLocation = (x, y, rating, neighborhood, notes = null, userID) => {
 
-  return Location.create(location)
-    .then(() => console.log('Registed!'))
-    .catch((err) => console.log(err))
+  return Location.create({
+      x: x,
+      y: y,
+      rating: rating,
+      neighborhood: neighborhood,
+      notes: notes,
+      userID: userID
+  })
 }
 
 

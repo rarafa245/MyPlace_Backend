@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize')
 const db  = require('./../../../db')
 
+
 const Location = db.define('location', {
   local_id: {
     type: DataTypes.BIGINT(8),
@@ -26,7 +27,8 @@ const Location = db.define('location', {
   },
 
   neighborhood: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
 
   notes: {
