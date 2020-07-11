@@ -1,4 +1,4 @@
-const { registerAccount } = require('./../controllers/login')
+const { loginUser, registerAccount } = require('./../controllers/login')
 
 const login = (application) => {
   /* Routes related to login. Redirecting to controllers
@@ -6,9 +6,10 @@ const login = (application) => {
     :return - None
   */
   
-  application.get('/login', (req, res) => console.log('Olas'))
+  application.post('/login', (req, res) => loginUser(req, res))
   application.post('/register', (req, res) => registerAccount(req, res))
 
 }
+
 
 module.exports = login

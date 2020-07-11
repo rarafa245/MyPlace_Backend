@@ -6,11 +6,12 @@ const { Users, Location } = require('./../tables')
     ORM: Sequelize
 */
 
-const insertUser = (user, password) => {
+const insertUser = (username, email, password) => {
 
   return Users.create({
-    user: user,
+    username: username,
     password: password,
+    email: email,
     createDay: new Date()
   })
 }
