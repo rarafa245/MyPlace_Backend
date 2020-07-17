@@ -16,15 +16,16 @@ const insertUser = (username, email, password) => {
   })
 }
 
-const insertLocation = (x, y, rating, neighborhood, notes = null, userID) => {
+const insertLocation = (name, group, rating, x, y, notes, userID) => {
 
   return Location.create({
-      x: x,
-      y: y,
-      rating: rating,
-      neighborhood: neighborhood,
-      notes: notes,
-      userID: userID
+    name: name,
+    group: group,
+    rating: rating,
+    x: x,
+    y: y,
+    notes: notes,
+    userID: userID
   })
 }
 

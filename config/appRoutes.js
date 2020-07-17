@@ -5,9 +5,11 @@ const appRoutes = (server) => {
   */
 
     const login = require(__dirname + './../app/routes/login')(server)
+    const registerCoords = require(__dirname + './../app/routes/registerCoords')(server)
 
     return {
-      login: login
+      login: login,
+      registerCoords: registerCoords
     }
 }
 

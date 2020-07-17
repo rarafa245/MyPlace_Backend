@@ -3,10 +3,31 @@ const db  = require('./../../../db')
 
 
 const Location = db.define('location', {
-  local_id: {
+  
+  localID: {
     type: DataTypes.BIGINT(8),
     primaryKey: true,
     autoIncrement: true
+  },
+
+  name: {
+    type: DataTypes.STRING(20),
+    allowNull: false,
+    unique: true
+  },
+
+  group: {
+    type: DataTypes.ENUM({
+      values: ['Lazer', 'Restaurante', 'Serviços']
+    }),
+    allowNull: false
+  },
+
+  rating: {
+    type: DataTypes.ENUM({
+      values: ['1', '2', '3', '4', '5']
+    }),
+    allowNull: false
   },
 
   x : {
@@ -19,18 +40,6 @@ const Location = db.define('location', {
     allowNull: false
   },
 
-  rating: {
-    type: DataTypes.ENUM({
-      values: ['1', '2', '3', '4', '5']
-    }),
-    allowNull: false
-  },
-
-  neighborhood: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-
   notes: {
     type: DataTypes.TEXT
   },
@@ -40,8 +49,9 @@ const Location = db.define('location', {
     references: {
       model: 'users',
       key: 'userID'
-      }
+    }
   }
+
 })
 
 module.exports = Location

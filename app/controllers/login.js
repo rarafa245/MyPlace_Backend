@@ -9,7 +9,7 @@ const loginUser = (req, res) => {
 
   const userData = req.body
 
-  queryUser(req.body.username, req.body.password)
+  queryUser(userData.username, userData.password)
     .then((query) => {
       const response = query[0].dataValues
       res.json({
