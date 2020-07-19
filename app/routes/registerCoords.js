@@ -1,10 +1,14 @@
-const { getLocalCoords } = require('./../controllers/registerCoords')
+const { insertLocalCoords } = require('./../controllers/registerCoords')
 
-const registerCoords = (application) => {
+const setCoords = (application) => {
+  /* Routes related to insert and alter local datas.
+    :parram - application server
+    :return - None
+  */
   
-  application.post('/registerCoords', (req, res) => getLocalCoords(req, res))
+  application.post('/registerCoords', (req, res) => insertLocalCoords(req, res))
 
 }
 
 
-module.exports = registerCoords
+module.exports = setCoords

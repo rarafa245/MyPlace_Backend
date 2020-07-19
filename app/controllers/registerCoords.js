@@ -1,6 +1,10 @@
 const { insertLocation } = require('./../modules/inserts')
 
-const getLocalCoords = (req, res) => {
+const insertLocalCoords = (req, res) => {
+    /* Insert local informations in DB.
+        :parram - req, res : Client require / Client response
+        :return - Json with the Success / failure of the process
+    */
 
     const localData = req.body
     const userID = req.header('UID')
@@ -28,5 +32,5 @@ const getLocalCoords = (req, res) => {
 
 
 module.exports = {
-    getLocalCoords: getLocalCoords
+    insertLocalCoords: insertLocalCoords
 }

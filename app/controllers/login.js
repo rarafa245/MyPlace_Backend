@@ -1,4 +1,4 @@
-const { insertUser, insertLocation } = require('./../modules/inserts')
+const { insertUser } = require('./../modules/inserts')
 const { queryUser } = require('./../modules/querys')
 
 const loginUser = (req, res) => {

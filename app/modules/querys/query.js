@@ -1,5 +1,11 @@
 const { Users, Location } = require('./../tables')
 
+/*  Query functions.
+    Acessing tables in DB
+    All functions return promisses.
+    ORM: Sequelize
+*/
+
 const queryUser = (username, password) => {
 
     return Users.findAll({
@@ -11,9 +17,19 @@ const queryUser = (username, password) => {
         }
     })
 }
+
+
+const queryUserCoords = (userID) => {
+
+    return Location.findAll({
+        attributes: ['x', 'y'],
+        where: { userID: userID }
+    })
+}
   
   
 module.exports = {
-    queryUser: queryUser
+    queryUser: queryUser,
+    queryUserCoords: queryUserCoords
 }
   
