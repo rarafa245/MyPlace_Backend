@@ -1,4 +1,6 @@
 const { searchUserCoords } = require('./../controllers/searchCoords')
+const { authToken } = require('./../middlewares')
+
 
 const searchCoords = (application) => {
   /* Routes related to insert and alter local datas.
@@ -6,7 +8,7 @@ const searchCoords = (application) => {
     :return - None
   */
   
-  application.get('/userCoords', (req, res) => searchUserCoords(req, res))
+  application.get('/userCoords', authToken, (req, res) => searchUserCoords(req, res))
 
 }
 

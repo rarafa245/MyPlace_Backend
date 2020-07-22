@@ -22,7 +22,7 @@ const queryUser = (username, password) => {
 const queryUserCoords = (userID) => {
 
     return Location.findAll({
-        attributes: ['x', 'y'],
+        attributes: ['name', 'group', 'rating', 'x', 'y' , 'notes'],
         where: { userID: userID }
     })
 }

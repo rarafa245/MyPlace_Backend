@@ -1,4 +1,6 @@
 const { insertLocalCoords } = require('./../controllers/registerCoords')
+const { authToken } = require('./../middlewares')
+
 
 const setCoords = (application) => {
   /* Routes related to insert and alter local datas.
@@ -6,7 +8,7 @@ const setCoords = (application) => {
     :return - None
   */
   
-  application.post('/registerCoords', (req, res) => insertLocalCoords(req, res))
+  application.post('/registerCoords', authToken, (req, res) => insertLocalCoords(req, res))
 
 }
 

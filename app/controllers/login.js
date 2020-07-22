@@ -1,5 +1,7 @@
+require('dotenv').config()
 const { insertUser } = require('./../modules/inserts')
 const { queryUser } = require('./../modules/querys')
+const jwt = require('jsonwebtoken')
 
 const loginUser = (req, res) => {
   /* Searching User in DB and sending status
@@ -11,9 +13,15 @@ const loginUser = (req, res) => {
 
   queryUser(userData.username, userData.password)
     .then((query) => {
+
       const response = query[0].dataValues
+      const userID = {userID: response.userID}
+
+      const token = jwt.sign(userID, process.env.ACESS_TOKEN_SECRET, {expiresIn: '30min'})
+
       res.json({
         userID: response.userID,
+        JWT: token,
         username: response.username,
         email: response.email,
         status: true,
