@@ -1,5 +1,6 @@
 const { insertLocation } = require('./../modules/inserts')
 
+
 const insertLocalCoords = (req, res) => {
     /* Insert local informations in DB.
         :parram - req, res : Client require / Client response
@@ -14,7 +15,7 @@ const insertLocalCoords = (req, res) => {
                     localData.rating,
                     localData.x,
                     localData.y,
-                    '',
+                    localData.notes,
                     userID )
         .then((message) => {
             res.json({
