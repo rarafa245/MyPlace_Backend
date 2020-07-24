@@ -1,4 +1,5 @@
 const { Users, Location } = require('./../tables')
+const crypto = require('crypto')
 
 /*  Query functions.
     Acessing tables in DB
@@ -8,12 +9,16 @@ const { Users, Location } = require('./../tables')
 
 const queryUser = (username, password) => {
 
+    const cryptPass = crypto.createHash("md5")
+                          .update(password)
+                          .digest('hex')
+
     return Users.findAll({
         limit: 1,
         attributes: ['userID', 'username', 'email'],
         where: {
             username: username,
-            password: password
+            password: cryptPass
         }
     })
 }

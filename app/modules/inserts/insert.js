@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const { Users, Location } = require('./../tables')
 
 /*  Insert functions.
@@ -8,9 +9,14 @@ const { Users, Location } = require('./../tables')
 
 const insertUser = (username, email, password) => {
 
+  const cryptPass = crypto.createHash("md5")
+                          .update(password)
+                          .digest('hex')
+
+
   return Users.create({
     username: username,
-    password: password,
+    password: cryptPass,
     email: email,
     createDay: new Date()
   })
