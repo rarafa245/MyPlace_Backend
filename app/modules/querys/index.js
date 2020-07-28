@@ -1,5 +1,5 @@
 const { queryUser, 
-        queryUserCoords } = require('./query')
+        queryUserCoords } = require('./querys')
 
 module.exports = {
     queryUser: queryUser,

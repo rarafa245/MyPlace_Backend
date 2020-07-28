@@ -1,4 +1,4 @@
-const { Users, Location } = require('./../tables')
+const { Users, Location } = require('../tables')
 const crypto = require('crypto')
 
 /*  Query functions.
@@ -27,7 +27,7 @@ const queryUser = (username, password) => {
 const queryUserCoords = (userID) => {
 
     return Location.findAll({
-        attributes: ['name', 'group', 'rating', 'x', 'y' , 'notes'],
+        attributes: ['localID','name', 'group', 'rating', 'x', 'y' , 'notes'],
         where: { userID: userID }
     })
 }
