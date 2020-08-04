@@ -1,7 +1,9 @@
 const { queryUser, 
-        queryUserCoords } = require('./querys')
+        queryUserCoords,
+        queryPaginationCoords } = require('./querys')
 
 module.exports = {
     queryUser: queryUser,
-    queryUserCoords: queryUserCoords
+    queryUserCoords: queryUserCoords,
+    queryPaginationCoords: queryPaginationCoords
 }

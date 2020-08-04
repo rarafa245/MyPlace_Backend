@@ -1,4 +1,4 @@
-const { searchUserCoords } = require('./../controllers/searchCoords')
+const { searchUserCoords, getCoordsPagination } = require('./../controllers/searchCoords')
 const { authToken } = require('./../middlewares')
 
 
@@ -9,6 +9,7 @@ const searchCoords = (application) => {
   */
   
   application.get('/userCoords', authToken, (req, res) => searchUserCoords(req, res))
+  application.get('/pagination', (req, res) => getCoordsPagination(req, res))
 
 }
 

@@ -31,10 +31,26 @@ const queryUserCoords = (userID) => {
         where: { userID: userID }
     })
 }
+
+
+const queryPaginationCoords = (userID, page) => {
+
+    const pagination = 2
+    const offset = pagination * page
+    const limit = offset + pagination
+
+    return Location.findAndCountAll({
+        attributes: ['name', 'rating', 'x', 'y'],
+        where: { userID: userID },
+        limit: limit,
+        offset: offset,
+    })
+}
   
   
 module.exports = {
     queryUser: queryUser,
-    queryUserCoords: queryUserCoords
+    queryUserCoords: queryUserCoords,
+    queryPaginationCoords: queryPaginationCoords
 }
   

@@ -1,4 +1,4 @@
-const { queryUserCoords } = require('./../modules/querys')
+const { queryUserCoords, queryPaginationCoords } = require('./../modules/querys')
 
 const searchUserCoords = (req, res) => {
     /* Get all user Coords and return them
@@ -23,6 +23,29 @@ const searchUserCoords = (req, res) => {
         })
 }
 
+
+const getCoordsPagination = (req, res) => {
+
+    const coords = []
+    const userID = req.header('UID')
+
+    queryPaginationCoords(userID, 0)
+        .then((response) => {
+            response.rows.forEach( element => coords.push(element.dataValues) )
+            res.json({
+                coords: coords,
+                count: response.count
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json({Deu: 'ruim'})
+        })
+}
+
+
+
 module.exports= {
-    searchUserCoords: searchUserCoords
+    searchUserCoords: searchUserCoords,
+    getCoordsPagination: getCoordsPagination
 }
