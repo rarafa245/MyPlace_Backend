@@ -24,17 +24,18 @@ const searchUserCoords = (req, res) => {
 }
 
 
-const getCoordsPagination = (req, res) => {
+const getCoordsPagination = (req, res, page) => {
 
     const coords = []
     const userID = req.header('UID')
+    const pagination = 2
 
-    queryPaginationCoords(userID, 0)
+    queryPaginationCoords(userID, page)
         .then((response) => {
             response.rows.forEach( element => coords.push(element.dataValues) )
             res.json({
                 coords: coords,
-                count: response.count
+                pages: Math.ceil(response.count/pagination)
             })
         })
         .catch((err) => {

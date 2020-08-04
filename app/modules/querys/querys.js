@@ -37,7 +37,7 @@ const queryPaginationCoords = (userID, page) => {
 
     const pagination = 2
     const offset = pagination * page
-    const limit = offset + pagination
+    const limit = pagination
 
     return Location.findAndCountAll({
         attributes: ['name', 'rating', 'x', 'y'],

@@ -9,7 +9,7 @@ const searchCoords = (application) => {
   */
   
   application.get('/userCoords', authToken, (req, res) => searchUserCoords(req, res))
-  application.get('/pagination', (req, res) => getCoordsPagination(req, res))
+  application.get('/pagination', authToken, (req, res) => getCoordsPagination(req, res, page=req.query.page))
 
 }
 
