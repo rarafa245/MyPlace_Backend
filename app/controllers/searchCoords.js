@@ -28,7 +28,7 @@ const getCoordsPagination = (req, res, page) => {
 
     const coords = []
     const userID = req.header('UID')
-    const pagination = 2
+    const pagination = 5
 
     queryPaginationCoords(userID, page)
         .then((response) => {

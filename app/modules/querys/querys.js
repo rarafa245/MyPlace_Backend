@@ -35,7 +35,7 @@ const queryUserCoords = (userID) => {
 
 const queryPaginationCoords = (userID, page) => {
 
-    const pagination = 2
+    const pagination = 5
     const offset = pagination * page
     const limit = pagination
 

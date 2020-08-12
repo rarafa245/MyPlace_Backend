@@ -4,7 +4,7 @@ const dbConfig = {
   username: 'root',
   password: 'Elipse0001',
   database: 'myplace',
-  logging: false,
+  logging: true,
   define: {
     timestamps: false
   }
