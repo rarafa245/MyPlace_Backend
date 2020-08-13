@@ -4,7 +4,7 @@ const { authToken } = require('./../middlewares')
 
 
 const setCoords = (application) => {
-  /* Routes related to insert and alter local datas.
+  /* Routes related to insert, alter and delete local datas.
     :parram - application server
     :return - None
   */

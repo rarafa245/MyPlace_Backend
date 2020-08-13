@@ -1,6 +1,10 @@
 const { removeLocal } = require('./../modules/deletes')
 
 const deleteLocalCoords = (req, res) => {
+    /* Delete local register in DB
+        :parram - req: localID - The ID of the local (column localID) 
+        :return - res: Json with the Success / failure of the process
+    */
 
     const localID = req.body.localID
 

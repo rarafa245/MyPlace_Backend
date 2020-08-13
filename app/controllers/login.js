@@ -5,8 +5,9 @@ const jwt = require('jsonwebtoken')
 
 const loginUser = (req, res) => {
   /* Searching User in DB and sending status
-    :parram - req, res : Client require / Client response
-    :return - Json with the Success / failure of the process
+    :parram - req: username - Client Username
+                   password - Client Password
+    :return - res: Json with the Success / failure of the process
   */
 
   const userData = req.body
@@ -15,8 +16,8 @@ const loginUser = (req, res) => {
     .then((query) => {
 
       const response = query[0].dataValues
+      
       const userID = {userID: response.userID}
-
       const token = jwt.sign(userID, process.env.ACESS_TOKEN_SECRET, {expiresIn: '30min'})
 
       res.json({
@@ -39,20 +40,22 @@ const loginUser = (req, res) => {
 
 const registerAccount = (req, res) => {
   /* Processing user data, registering and sending status
-    :parram - req, res : Client require / Client response
-    :return - Json with the Success / failure of the process
+    :parram - req: username - New client username
+                   email - New client email
+                   password - New client password
+    :return - res: Json with the Success / failure of the process
   */
 
   const userData = req.body
 
-  insertUser(req.body.username, req.body.email, req.body.password)
+  insertUser(userData.username, userData.email, userData.password)
     .then(() => res.json({
       Status: true,
-      Message: "Customer Successfully Registered"
+      Message: "Novo usuário registrado com sucesso!"
     }))
     .catch((err) => res.json({
       Status: false,
-      Message: "An Error Has Occurred, Please Try Again"
+      Message: "Um erro ocorreu. Tente novamente!"
     }))
 }
 

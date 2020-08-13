@@ -3,15 +3,15 @@ const crypto = require('crypto')
 
 /*  Query functions.
     Acessing tables in DB
-    All functions return promisses.
+    All closures return promisses.
     ORM: Sequelize
 */
 
 const queryUser = (username, password) => {
 
     const cryptPass = crypto.createHash("md5")
-                          .update(password)
-                          .digest('hex')
+                            .update(password)
+                            .digest('hex')
 
     return Users.findAll({
         limit: 1,

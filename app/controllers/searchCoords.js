@@ -1,9 +1,10 @@
 const { queryUserCoords, queryPaginationCoords } = require('./../modules/querys')
 
 const searchUserCoords = (req, res) => {
-    /* Get all user Coords and return them
-        :parram - req, res : Client require / Client response
-        :return - Json with array with coords infos
+    /* Get all user Coords with informations and return it
+        :parram - header: UID - User ID 
+                - req: None
+        :return - res: Json with array with coords infos
     */
 
     const coords = []
@@ -11,7 +12,7 @@ const searchUserCoords = (req, res) => {
 
     queryUserCoords(userID)
         .then((response) => {
-            response.forEach( element => coords.push(element.dataValues) )
+            response.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
             res.json({
                 coords: coords
             })
@@ -25,6 +26,12 @@ const searchUserCoords = (req, res) => {
 
 
 const getCoordsPagination = (req, res, page) => {
+    /* Get user Coords with informations in pagination format and return it
+        :parram - header: UID - User ID 
+                - req: None
+                - page: URL argument informing the page required
+        :return - res: Json with array with coords infos
+    */
 
     const coords = []
     const userID = req.header('UID')
@@ -39,7 +46,6 @@ const getCoordsPagination = (req, res, page) => {
             })
         })
         .catch((err) => {
-            console.log(err)
             res.json({Deu: 'ruim'})
         })
 }

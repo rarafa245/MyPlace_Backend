@@ -3,7 +3,7 @@ const { Users, Location } = require('./../tables')
 
 /*  Insert functions.
     Acessing tables in DB
-    All functions return promisses.
+    All closures return promisses.
     ORM: Sequelize
 */
 
@@ -13,26 +13,25 @@ const insertUser = (username, email, password) => {
                           .update(password)
                           .digest('hex')
 
-
   return Users.create({
-    username: username,
-    password: cryptPass,
-    email: email,
-    createDay: new Date()
-  })
+      username: username,
+      password: cryptPass,
+      email: email,
+      createDay: new Date()
+    })
 }
 
 const insertLocation = (name, group, rating, x, y, notes, userID) => {
 
   return Location.create({
-    name: name,
-    group: group,
-    rating: rating,
-    x: x,
-    y: y,
-    notes: notes,
-    userID: userID
-  })
+      name: name,
+      group: group,
+      rating: rating,
+      x: x,
+      y: y,
+      notes: notes,
+      userID: userID
+    })
 }
 
 
