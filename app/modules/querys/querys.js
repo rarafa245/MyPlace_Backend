@@ -9,17 +9,10 @@ const crypto = require('crypto')
 
 const queryUser = (username, password) => {
 
-    const cryptPass = crypto.createHash("md5")
-                            .update(password)
-                            .digest('hex')
-
     return Users.findAll({
         limit: 1,
-        attributes: ['userID', 'username', 'email'],
-        where: {
-            username: username,
-            password: cryptPass
-        }
+        attributes: ['userID', 'username', 'email', 'password'],
+        where: { username: username }
     })
 }
 

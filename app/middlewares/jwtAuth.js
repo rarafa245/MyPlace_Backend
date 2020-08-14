@@ -7,14 +7,14 @@ const authToken = (req, res, next) => {
 
     if (!token) return res.json({
         status: false,
-        message: 'Error! User not authorization'
+        message: 'Erro! Usuário não autorizado!'
     })
 
     jwt.verify(token, process.env.ACESS_TOKEN_SECRET, (err, data) => {
 
         if (err) return res.json({
             status: false,
-            message: 'Error! JWT error!'
+            message: 'Erro! JWT inválido!'
         })
 
         req.data = data

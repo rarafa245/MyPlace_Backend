@@ -2,6 +2,7 @@ require('dotenv').config()
 const { insertUser } = require('./../modules/inserts')
 const { queryUser } = require('./../modules/querys')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 
 const loginUser = (req, res) => {
   /* Searching User in DB and sending status
@@ -16,7 +17,18 @@ const loginUser = (req, res) => {
     .then((query) => {
 
       const response = query[0].dataValues
-      
+      const cryptPass = crypto.createHash("md5")
+                            .update(userData.password)
+                            .digest('hex')
+
+      if (response.password != cryptPass) {
+        res.json({
+          status: false,
+          message: 'Senha Inválida! Tente Novamente!'
+        })
+        return
+      }
+
       const userID = {userID: response.userID}
       const token = jwt.sign(userID, process.env.ACESS_TOKEN_SECRET, {expiresIn: '30min'})
 
@@ -32,7 +44,7 @@ const loginUser = (req, res) => {
     .catch((err) => {
       res.json({
         status: false,
-        message: 'Usuario ou Senha não Reconhecidas. Tente Novamente!'
+        message: 'Usuário não cadastrado. Tente Novamente!'
       })
     })
 }
@@ -90,7 +102,7 @@ const errorHandlerForRegisterUser = (err, res) => {
       break
 
     default:
-    
+
       res.json({
         Status: false,
         Message: "Ocorreu um problema, Tente novamente!"
