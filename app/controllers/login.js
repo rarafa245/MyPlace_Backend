@@ -53,10 +53,50 @@ const registerAccount = (req, res) => {
       Status: true,
       Message: "Novo usuário registrado com sucesso!"
     }))
-    .catch((err) => res.json({
-      Status: false,
-      Message: "Um erro ocorreu. Tente novamente!"
-    }))
+    .catch((err) => errorHandlerForRegisterUser(err, res) )
+}
+
+
+const errorHandlerForRegisterUser = (err, res) => {
+  /* Handling errors and responses after bad query in register new users
+      :parram - err: error object after bad query    
+      :return - res: Jon with the proper message
+  */
+
+  errorCode = err.errors[0].type
+
+  switch (errorCode) {
+    case 'unique violation':
+
+      const field = err.errors[0].path    // username or email fieds
+      if (field === 'username')
+        res.json({
+          Status: false,
+          Message: "Erro! Usuario já existente. Tente novamente!"
+        })
+      else 
+        res.json({
+          Status: false,
+          Message: "Erro! Email já cadastrados. Tente novamente!"
+        })
+      break
+    
+    case 'Validation error':
+
+      res.json({
+        Status: false,
+        Message: "Erro! Email no formato incorreto!. Tente novamente!"
+      })
+      break
+
+    default:
+    
+      res.json({
+        Status: false,
+        Message: "Ocorreu um problema, Tente novamente!"
+      })
+      break
+  }
 }
 
 

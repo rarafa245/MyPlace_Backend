@@ -7,7 +7,7 @@ const login = (application) => {
   */
   
   application.post('/login', (req, res) => loginUser(req, res))
-  application.post('/register', (req, res) => registerAccount(req, res))
+  application.post('/registerNewUser', (req, res) => registerAccount(req, res))
 
 }
 
