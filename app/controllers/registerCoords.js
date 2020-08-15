@@ -16,6 +16,12 @@ const insertLocalCoords = (req, res) => {
    const userID = req.header('UID')
     const localData = req.body
 
+    if (localData.rating === '0')
+        return res.json({
+            status: false,
+            Mensagem: 'Erro ao Registrar, Tente Novamente!'
+        })
+
     insertLocation( localData.localName,
                     localData.group,
                     localData.rating,
@@ -24,14 +30,13 @@ const insertLocalCoords = (req, res) => {
                     localData.notes,
                     userID )
         .then((message) => {
-            res.json({
+            return res.json({
                 status: true,
                 message: 'Local Registrado Com Sucesso!'
             })
         })
         .catch((err) => {
-            console.log(err)
-            res.json({
+            return res.json({
                 status: false,
                 Mensagem: 'Erro ao Registrar, Tente Novamente!'
             })
