@@ -13,16 +13,16 @@ const searchUserCoords = (req, res) => {
 
     queryUserCoords(userID)
         .then((response) => {
-            
             response.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
-
             res.json({
+                status: true,
                 coords: coords
             })
         })
         .catch((err) => {
             res.json({
-              coords: coords
+                status: false,
+                message: 'Ocorreu um erro. Tente novamente!'
             })
         })
 }
