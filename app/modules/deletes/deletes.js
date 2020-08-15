@@ -6,12 +6,13 @@ const { Users, Location } = require('../tables')
     ORM: Sequelize
 */
 
-const removeLocal = (localID) => {
+const removeLocal = (userID, localID) => {
 
     return Location.destroy({
         limit: 1,
         where: {
-            localID: localID
+            localID: localID,
+            userID: userID
         }
     })
 

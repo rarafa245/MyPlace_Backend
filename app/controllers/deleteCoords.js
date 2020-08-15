@@ -6,9 +6,10 @@ const deleteLocalCoords = (req, res) => {
         :return - res: Json with the Success / failure of the process
     */
 
+   const userID = req.header('UID')
     const localID = req.body.localID
 
-    removeLocal(localID)
+    removeLocal(userID, localID)
         .then((message) => {
             res.json({
                 status: true,
