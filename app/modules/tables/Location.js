@@ -10,10 +10,14 @@ const Location = db.define('location', {
     autoIncrement: true
   },
 
+  userID: {
+    type: DataTypes.BIGINT(8),
+    primaryKey: true,
+  },
+
   name: {
     type: DataTypes.STRING(30),
-    allowNull: false,
-    unique: true
+    allowNull: false
   },
 
   group: {
@@ -42,16 +46,8 @@ const Location = db.define('location', {
 
   notes: {
     type: DataTypes.TEXT
-  },
-
-  userID: {
-    type: DataTypes.BIGINT(8),
-    references: {
-      model: 'users',
-      key: 'userID'
-    }
   }
-
+  
 })
 
 module.exports = Location
