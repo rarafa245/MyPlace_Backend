@@ -1,4 +1,5 @@
 const { queryUserCoords, queryPaginationCoords } = require('./../modules/querys')
+const { refreshToken } = require('./jwtHandler')
 
 const searchUserCoords = (req, res) => {
     /* Get all user Coords with informations and return it
@@ -12,7 +13,9 @@ const searchUserCoords = (req, res) => {
 
     queryUserCoords(userID)
         .then((response) => {
+            
             response.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
+
             res.json({
                 coords: coords
             })

@@ -1,7 +1,6 @@
-require('dotenv').config()
 const { insertUser } = require('./../modules/inserts')
 const { queryUser } = require('./../modules/querys')
-const jwt = require('jsonwebtoken')
+const { createToken } = require('./jwtHandler') 
 const crypto = require('crypto')
 
 const loginUser = (req, res) => {
@@ -29,8 +28,8 @@ const loginUser = (req, res) => {
         return
       }
 
-      const userID = {userID: response.userID}
-      const token = jwt.sign(userID, process.env.ACESS_TOKEN_SECRET, {expiresIn: '30min'})
+      const EXPIRE_JWT_TIME = 40
+      const token = createToken(response.userID, EXPIRE_JWT_TIME)
 
       res.json({
         userID: response.userID,
