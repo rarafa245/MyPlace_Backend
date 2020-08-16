@@ -38,18 +38,21 @@ const getCoordsPagination = (req, res, page) => {
 
     const coords = []
     const userID = req.header('UID')
-    const pagination = 5
 
     queryPaginationCoords(userID, page)
         .then((response) => {
-            response.rows.forEach( element => coords.push(element.dataValues) )
-            res.json({
-                coords: coords,
-                pages: Math.ceil(response.count/pagination)
+            response.forEach( element => coords.push(element) )
+            console.log(response)
+            return res.json({
+                status: true,
+                coords: coords
             })
         })
         .catch((err) => {
-            res.json({Deu: 'ruim'})
+            res.json({
+                status: false,
+                message: 'Um erro ocorreu. Tente novamente!'
+            })
         })
 }
 

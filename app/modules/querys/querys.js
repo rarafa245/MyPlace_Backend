@@ -1,5 +1,6 @@
 const { Users, Location } = require('../tables')
-const crypto = require('crypto')
+const { QueryTypes } = require('sequelize')
+const db  = require('./../../../db')
 
 /*  Query functions.
     Acessing tables in DB
@@ -30,17 +31,22 @@ const queryPaginationCoords = (userID, page) => {
 
     const pagination = 5
     const offset = pagination * page
-    const limit = pagination
+    const limit = offset + pagination
 
-    return Location.findAndCountAll({
-        attributes: ['name', 'rating', 'x', 'y'],
-        where: { userID: userID },
-        limit: limit,
-        offset: offset,
-    })
+    return db.query(
+        "SELECT `name`, `rating` , `x`, `y`\
+        from  `myplace`.`locations` AS `location`\
+        INNER JOIN(\
+            SELECT `localID` , `userID`\
+            from `myplace`.`locations` AS `location2`\
+            WHERE `userID` = '1'"+
+            `LIMIT ${offset}, ${limit}`+
+        ") AS `location2` USING(localID, userID)", 
+        {type: QueryTypes.SELECT}
+    )
 }
-  
-  
+
+
 module.exports = {
     queryUser: queryUser,
     queryUserCoords: queryUserCoords,
