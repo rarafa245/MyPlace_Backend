@@ -20,7 +20,7 @@ const queryUser = (username, password) => {
 
 const queryUserCoords = (userID) => {
 
-    return Location.findAll({
+    return Location.findAndCountAll({
         attributes: ['localID','name', 'group', 'rating', 'x', 'y' , 'notes'],
         where: { userID: userID }
     })
