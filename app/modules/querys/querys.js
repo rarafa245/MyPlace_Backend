@@ -38,8 +38,8 @@ const queryPaginationCoords = (userID, page) => {
         from  `myplace`.`locations` AS `location`\
         INNER JOIN(\
             SELECT `localID` , `userID`\
-            from `myplace`.`locations` AS `location2`\
-            WHERE `userID` = '1'"+
+            from `myplace`.`locations` AS `location2 `"+
+            "WHERE `userID` = "+ `${userID} `+
             `LIMIT ${offset}, ${limit}`+
         ") AS `location2` USING(localID, userID)", 
         {type: QueryTypes.SELECT}

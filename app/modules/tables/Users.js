@@ -3,6 +3,7 @@ const db  = require('./../../../db')
 
 
 const Users = db.define('users', {
+  
   userID : {
     type: DataTypes.BIGINT(8),
     primaryKey: true,

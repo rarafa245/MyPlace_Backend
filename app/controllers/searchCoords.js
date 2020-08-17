@@ -42,7 +42,6 @@ const getCoordsPagination = (req, res, page) => {
     queryPaginationCoords(userID, page)
         .then((response) => {
             response.forEach( element => coords.push(element) )
-            console.log(response)
             return res.json({
                 status: true,
                 coords: coords
