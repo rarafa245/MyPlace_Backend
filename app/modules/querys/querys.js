@@ -20,7 +20,7 @@ const queryUser = (username, password) => {
 
 const queryUserCoords = (userID) => {
 
-    return Location.findAndCountAll({
+    return Location.findAll({
         attributes: ['localID','name', 'group', 'rating', 'x', 'y' , 'notes'],
         where: { userID: userID }
     })
@@ -31,7 +31,6 @@ const queryPaginationCoords = (userID, page) => {
 
     const pagination = 5
     const offset = pagination * page
-    const limit = offset + pagination
 
     return db.query(
         "SELECT `name`, `rating` , `x`, `y`\
@@ -40,8 +39,8 @@ const queryPaginationCoords = (userID, page) => {
             SELECT `localID` , `userID`\
             from `myplace`.`locations` AS `location2 `"+
             "WHERE `userID` = "+ `${userID} `+
-            `LIMIT ${offset}, ${limit}`+
-        ") AS `location2` USING(localID, userID)", 
+            `LIMIT ${offset}, ${pagination}`+
+        ") AS `location2` USING(localID, userID)",
         {type: QueryTypes.SELECT}
     )
 }
@@ -52,4 +51,3 @@ module.exports = {
     queryUserCoords: queryUserCoords,
     queryPaginationCoords: queryPaginationCoords
 }
-  

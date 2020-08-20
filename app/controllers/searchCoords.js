@@ -3,7 +3,7 @@ const { refreshToken } = require('./jwtHandler')
 
 const searchUserCoords = (req, res) => {
     /* Get all user Coords with informations and return it
-        :parram - header: UID - User ID 
+        :parram - header: UID - User ID
                 - req: None
         :return - res: Json with array with coords infos
     */
@@ -13,11 +13,10 @@ const searchUserCoords = (req, res) => {
 
     queryUserCoords(userID)
         .then((response) => {
-            response.rows.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
+            response.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
             res.json({
                 status: true,
-                coords: coords,
-                count:response.count
+                coords: coords
             })
         })
         .catch((err) => {
@@ -31,7 +30,7 @@ const searchUserCoords = (req, res) => {
 
 const getCoordsPagination = (req, res, page) => {
     /* Get user Coords with informations in pagination format and return it
-        :parram - header: UID - User ID 
+        :parram - header: UID - User ID
                 - req: None
                 - page: URL argument informing the page required
         :return - res: Json with array with coords infos
