@@ -11,14 +11,15 @@ const deleteLocalCoords = (req, res) => {
 
     removeLocal(userID, localID)
         .then((message) => {
-            res.json({
+            return res.json({
                 status: true,
                 message: 'Local Removido Com Sucesso!'
             })
         })
         .catch((err) => {
-            res.json({
+            return res.json({
                 status: false,
+                jwtError: false,
                 Mensagem: 'Erro ao Remover o Local, Tente Novamente!'
             })
         })

@@ -14,14 +14,15 @@ const searchUserCoords = (req, res) => {
     queryUserCoords(userID)
         .then((response) => {
             response.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
-            res.json({
+            return res.json({
                 status: true,
                 coords: coords
             })
         })
         .catch((err) => {
-            res.json({
+            return res.json({
                 status: false,
+                jwtError: false,
                 message: 'Ocorreu um erro. Tente novamente!'
             })
         })
@@ -48,8 +49,9 @@ const getCoordsPagination = (req, res, page) => {
             })
         })
         .catch((err) => {
-            res.json({
+            return res.json({
                 status: false,
+                jwtError: false,
                 message: 'Um erro ocorreu. Tente novamente!'
             })
         })

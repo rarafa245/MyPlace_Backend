@@ -21,17 +21,16 @@ const loginUser = (req, res) => {
                             .digest('hex')
 
       if (response.password != cryptPass) {
-        res.json({
+        return res.json({
           status: false,
           message: 'Senha Inválida! Tente Novamente!'
         })
-        return
       }
 
       const EXPIRE_JWT_TIME = 40
       const token = createToken(response.userID, EXPIRE_JWT_TIME)
 
-      res.json({
+      return res.json({
         userID: response.userID,
         JWT: token,
         username: response.username,
@@ -41,7 +40,7 @@ const loginUser = (req, res) => {
       })
     })
     .catch((err) => {
-      res.json({
+      return res.json({
         status: false,
         message: 'Usuário não cadastrado. Tente Novamente!'
       })

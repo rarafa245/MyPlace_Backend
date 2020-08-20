@@ -14,6 +14,7 @@ const authToken = (req, res, next) => {
     if (!token) 
         return res.json({
             status: false,
+            jwtError: true,
             message: 'Erro! Usuário não autorizado!'
         })
 
@@ -22,6 +23,7 @@ const authToken = (req, res, next) => {
         if (err || (data.JWTUserID != userID))           // Checking jwt key equals to user identification
             return res.json({
                 status: false,
+                jwtError: true,
                 message: 'Erro! JWT inválido!'
             })
 

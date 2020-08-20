@@ -38,6 +38,7 @@ const insertLocalCoords = (req, res) => {
         .catch((err) => {
             return res.json({
                 status: false,
+                jwtError: false,
                 Mensagem: 'Erro ao Registrar, Tente Novamente!'
             })
         })
