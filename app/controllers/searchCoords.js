@@ -13,7 +13,7 @@ const searchUserCoords = (req, res) => {
 
     queryUserCoords(userID)
         .then((response) => {
-            response.forEach( element => coords.push(element.dataValues) )  // {localID, name, group, rating, x, y, notes}
+            response.forEach( element => coords.push(element) )  // {localID, name, group, rating, x, y, notes}
             return res.json({
                 status: true,
                 coords: coords

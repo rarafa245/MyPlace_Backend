@@ -20,10 +20,16 @@ const queryUser = (username, password) => {
 
 const queryUserCoords = (userID) => {
 
-    return Location.findAll({
-        attributes: ['localID','name', 'group', 'rating', 'x', 'y' , 'notes'],
-        where: { userID: userID }
-    })
+    return db.query(
+        "SELECT `localID`, `name`, `group`, `rating`, `x`, `y`, `notes`\
+        from  `myplace`.`locations` AS `location`\
+        INNER JOIN(\
+            SELECT `localID` , `userID`\
+            from `myplace`.`locations` AS `location2 `"+
+            "WHERE `userID` = "+ `${userID} `+
+        ") AS `location2` USING(localID, userID)",
+        {type: QueryTypes.SELECT}
+    )
 }
 
 
